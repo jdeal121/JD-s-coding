@@ -1,0 +1,39 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class Jayd {
+
+    public static void main(String[] args) {
+        try {
+            File j = new File("your_file_path_here"); // Provide the path to your file
+
+            Scanner input = new Scanner(j);
+
+            List<String> l = new ArrayList<String>();
+
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                l.addAll(Arrays.asList(line.split(" ")));
+            }
+
+            Collections.sort(l);
+
+            for (String temp : l) {
+                if (temp != null && !temp.equals("")) {
+                    if (Character.isLetter(temp.charAt(0))) {
+                        System.out.println(temp);
+                    }
+                }
+            }
+
+            input.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: File not found.");
+        }
+    }
+}

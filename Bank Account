@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+class BankAccount {
+    private double balance;
+    private double annualInterestRate;
+
+    public BankAccount(double initialBalance, double annualInterestRate) {
+        this.balance = initialBalance;
+        this.annualInterestRate = annualInterestRate;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+        } else {
+            System.out.println("Invalid withdrawal amount or insufficient funds.");
+        }
+    }
+
+    public double getMonthlyInterest() {
+        double monthlyInterestRate = annualInterestRate / 12.0;
+        return balance * (monthlyInterestRate / 100.0);
+    }
+
+    public double getYearlyInterest() {
+        return balance * (annualInterestRate / 100.0);
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+public class BankAccounts {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter initial balance: ");
+        double initialBalance = scanner.nextDouble();
+
+        System.out.print("Enter annual interest rate (%): ");
+        double annualInterestRate = scanner.nextDouble();
+
+        BankAccount account = new BankAccount(initialBalance, annualInterestRate);
+
+        System.out.println("Bank Account Created");
+        System.out.println("Initial Balance: $" + account.getBalance());
+
+        
+        account.deposit(1000);
+        account.withdraw(500);
+
+        
+        System.out.println("Monthly Interest: $" + account.getMonthlyInterest());
+        System.out.println("Yearly Interest: $" + account.getYearlyInterest());
+
+        scanner.close();
+    }
+}
